@@ -1,0 +1,32 @@
+<project name="iSpeech API Implementation in Java" default="build">
+    <path id="project.class.path">
+	    <fileset dir="lib">
+            <include name="*.jar"/>
+	    </fileset>
+        <pathelement path="bin"/>
+    </path>
+
+	<target name="build">
+        <mkdir dir="bin"/>
+        <javac srcdir="src" destdir="bin" debug="true" source="1.5" target="1.5">
+			<classpath refid="project.class.path"/>
+        </javac>
+    </target>
+	
+    <target name="test" depends="build">
+        <junit printsummary="on" fork="no">
+			<classpath refid="project.class.path"/>
+            <batchtest todir="../testresults">
+                <fileset dir="bin">
+                    <include name="**/*TestCase.class"/>
+                </fileset>
+            </batchtest>
+        </junit>
+    </target>
+
+    <target name="clean">
+        <delete failonerror="false" verbose="yes">
+            <fileset dir="bin" includes="**/*.class"/>
+        </delete>
+    </target>
+</project>
