@@ -1,5 +1,7 @@
 <project name="iSpeech API Implementation in Java" default="build">
-    <path id="project.class.path">
+    <property name="build.version" value="1.0" />
+	
+	<path id="project.class.path">
 	    <fileset dir="lib">
             <include name="*.jar"/>
 	    </fileset>
@@ -24,9 +26,23 @@
         </junit>
     </target>
 
+    <target name="package" depends="build">
+        <jar destfile="ispeech-api-${build.version}.jar" basedir="bin">
+        	<exclude name="**/*TestCase.class"/>
+        </jar>
+    	<tar destfile="ispeech-api-${build.version}.tar.gz" compression="gzip">
+    		<tarfileset dir=".">
+				<include name="src/**"/>
+				<include name="lib/**"/>
+				<include name="ispeech-api*.jar"/>
+    		</tarfileset>
+		</tar>
+    </target>
+
     <target name="clean">
         <delete failonerror="false" verbose="yes">
             <fileset dir="bin" includes="**/*.class"/>
+			<fileset dir="." includes="ispeech-api*"/>
         </delete>
     </target>
 </project>
