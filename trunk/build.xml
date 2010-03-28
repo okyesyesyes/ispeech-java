@@ -15,10 +15,19 @@
         </javac>
     </target>
 	
+	<target name="doc">
+		<javadoc destdir="docs/api" author="true" version="true" use="true" windowtitle="Test API">
+		    <packageset dir="src" defaultexcludes="yes">
+				<include name="com/grandcare/ispeech/**"/>
+		    	<exclude name="com/grandcare/ispeech/**/*TestCase.*"/>
+		    </packageset>
+		</javadoc>	
+	</target>
+	
     <target name="test" depends="build">
         <junit printsummary="on" fork="no">
 			<classpath refid="project.class.path"/>
-            <batchtest todir="../testresults">
+            <batchtest>
                 <fileset dir="bin">
                     <include name="**/*TestCase.class"/>
                 </fileset>
@@ -26,7 +35,7 @@
         </junit>
     </target>
 
-    <target name="package" depends="build">
+    <target name="package" depends="build, doc">
         <jar destfile="ispeech-api-${build.version}.jar" basedir="bin">
         	<exclude name="**/*TestCase.class"/>
         </jar>
@@ -34,6 +43,7 @@
     		<tarfileset dir=".">
 				<include name="src/**"/>
 				<include name="lib/**"/>
+				<include name="docs/**"/>
 				<include name="ispeech-api*.jar"/>
     		</tarfileset>
 		</tar>
