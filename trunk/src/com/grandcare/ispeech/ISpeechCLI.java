@@ -16,7 +16,7 @@ import com.grandcare.ispeech.response.ISpeechStatusResponse;
  * user, converts the provided text into an mp3 file, and
  * saves it to the user specified location.<BR/>
  * <BR/>
- * See {@link #main(String[]) for a definition of the command
+ * See {@link #main(String[])} for a definition of the command
  * line arguments this application takes.
  *  
  * @author Nick Mitchell (nick@grandcare.com)
@@ -35,6 +35,14 @@ public class ISpeechCLI {
 	 */
 	public static void main(String[] args) throws Exception {
 
+		if(args.length != 4) {
+			System.out.println("Usage:");
+			System.out.println("\tjava com.grandcare.ispeech.ISpeechCLI " +
+					"<api-username> <api-password> <destination-file-path> " +
+					"<text-to-convert>\n\n");
+			System.exit(1);
+		}
+		
 		ISpeechAPI api = new ISpeechAPI(args[0], args[1]);
 
 		System.out.println("--- Requesting info from iSpeech...");

@@ -16,11 +16,13 @@
     </target>
 	
 	<target name="doc">
-		<javadoc destdir="docs/api" author="true" version="true" use="true" windowtitle="Test API">
-		    <packageset dir="src" defaultexcludes="yes">
+		<javadoc destdir="docs/api" author="true" version="true" use="true" 
+			windowtitle="iSpeech API Implementation in Java">
+			<classpath refid="project.class.path"/>
+		    <fileset dir="src">
 				<include name="com/grandcare/ispeech/**"/>
-		    	<exclude name="com/grandcare/ispeech/**/*TestCase.*"/>
-		    </packageset>
+		    	<exclude name="**/*TestCase.java"/>
+		    </fileset>
 		</javadoc>	
 	</target>
 	
@@ -53,6 +55,7 @@
         <delete failonerror="false" verbose="yes">
             <fileset dir="bin" includes="**/*.class"/>
 			<fileset dir="." includes="ispeech-api*"/>
+            <fileset dir="docs/api" includes="**/*"/>
         </delete>
     </target>
 </project>

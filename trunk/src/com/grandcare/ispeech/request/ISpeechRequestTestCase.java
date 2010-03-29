@@ -2,13 +2,10 @@ package com.grandcare.ispeech.request;
 
 import junit.framework.TestCase;
 
-import org.junit.Test;
-
 import com.grandcare.ispeech.ISpeechAudioFormat;
 
 public class ISpeechRequestTestCase extends TestCase {
 
-	@Test
 	public void testToRequestString() {
 		ISpeechRequest req = new ISpeechRequest("foo", "bar", ISpeechAction.CONVERT);
 		req.addParam("text", "Blah blah blah yakkity shmackity blah");
